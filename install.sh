@@ -1,0 +1,1 @@
+cp ./src.sh /usr/local/bin/hexagon
