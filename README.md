@@ -1,10 +1,12 @@
 # hexagon
-A helper for tasks timing
+A helper for tasks subtask distribution
 
 hexagon is a tool imitating polygon by codeforces.  
-It's used for determining the time consumed by each tasks for the whole set of solutions, making it easier to manage subtasks during the task setting sessions for competitive problems
+It's used for determining the time consumed by each tasks for the whole set of solutions, making it easier to manage subtasks during the task setting sessions for competitive problems.  
 
-## installable 
+TESTED ONLY ON MACOS
+
+## installation
 simply clone this and do
 ```
 ./install.sh
@@ -25,8 +27,13 @@ it now supports only c++ (.cpp) solution
 it now contain only one options 
 - ```-t=0.5 / --time=0.5``` represent time limit of each testcase in seconds (default 1 second)
 
+## screenshot
+![screenshot](https://github.com/vzsky/hexagon/blob/master/screenshot.png)
+
 ## future plan
 - add more supported languages
 - clean up the code
 - prettify the table
 - may need to migrate to another language lol
+- sort alphanumerically
+- test on other os
