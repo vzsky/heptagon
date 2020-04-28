@@ -6,7 +6,6 @@ A helper for tasks subtask distribution
   - usable on MacOS
   - Not tested on other os
   - Navigate to /shell and read README  
-#### Will be implemented in js again
 
 ## future plan
 
