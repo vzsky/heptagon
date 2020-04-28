@@ -1,0 +1,13 @@
+{
+  "name": "hexagon",
+  "version": "0.0.0",
+  "description": "just mini codeforces's polygon",
+  "main": "main.js",
+  "repository": "https://github.com/vzsky/hexagon",
+  "author": "my99n",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "meow": "^6.1.0"
+  }
+}
