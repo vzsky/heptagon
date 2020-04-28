@@ -39,12 +39,3 @@ it now contain only one options
 ## screenshot
 
 ![screenshot](https://github.com/vzsky/hexagon/blob/master/shell/screenshot.png)
-
-## future plan
-
--   add more supported languages
--   clean up the code
--   prettify the table
--   may need to migrate to another language (after testing: js might be the fittest)
--   sort alphanumerically
--   test on other os
