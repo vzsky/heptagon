@@ -38,7 +38,7 @@ it now contain only one options
 
 ## screenshot
 
-![screenshot](https://github.com/vzsky/hexagon/blob/master/screenshot.png)
+![screenshot](https://github.com/vzsky/hexagon/blob/master/shell/screenshot.png)
 
 ## future plan
 
