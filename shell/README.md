@@ -1,8 +1,8 @@
-# hexagon
+# heptagon
 
 A helper for tasks subtask distribution
 
-hexagon is a tool imitating polygon by codeforces.  
+heptagon is a tool imitating polygon by codeforces.  
 It's used for determining the time consumed by each tasks for the whole set of solutions, making it easier to manage subtasks during the task setting sessions for competitive problems.
 
 TESTED ONLY ON MACOS
@@ -38,4 +38,4 @@ it now contain only one options
 
 ## screenshot
 
-![screenshot](https://github.com/vzsky/hexagon/blob/master/shell/screenshot.png)
+![screenshot](https://github.com/vzsky/heptagon/blob/master/shell/screenshot.png)

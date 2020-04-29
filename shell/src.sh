@@ -3,7 +3,7 @@
 # 2 - relative path to Testcase folder
 # 3 - time limit in second
 
-APPNAME=hexagon
+APPNAME=heptagon
 
 function printTable()
 {

@@ -1,1 +1,1 @@
-cp ./src.sh /usr/local/bin/hexagon
+cp ./src.sh /usr/local/bin/heptagon

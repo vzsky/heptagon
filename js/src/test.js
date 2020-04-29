@@ -2,21 +2,19 @@ const judge = require("./judge")
 const chalk = require("chalk")
 
 const Test = (name, func, tobe) => {
-	return async () => {
+	return async (spinner) => {
 		let startAt = Date.now()
 		let res = await func()
 
-		let status = "ERROR"
-		if (JSON.stringify(res) === JSON.stringify(tobe)) {
-			status = chalk.black.bgGreen(" PASSED ")
-		} else {
-			status = chalk.white.bgRed(" FAILED ")
-		}
-		console.log(
-			`${status} on test ${chalk.cyan(name)} in ${chalk.yellow(
-				Date.now() - startAt
-			)} ms`
-		)
+		let status = JSON.stringify(res) === JSON.stringify(tobe) ? 1 : 0
+		let msg = `${
+			status
+				? chalk.black.bgGreen(" PASSED ")
+				: chalk.white.bgRed(" FAILED ")
+		} ${name} in ${chalk.yellow(Date.now() - startAt)} ms`
+		if (status) spinner.succeed(msg)
+		if (!status) spinner.succeed(msg)
+		spinner.start()
 	}
 }
 
@@ -43,13 +41,7 @@ const testJudgeAnswer = Test(
 			1000,
 			"sub2"
 		),
-	{
-		"2": "TLE",
-		"9": "TLE",
-		"10": "TLE",
-		sample: "TLE",
-		w: "Wrong",
-	}
+	{ "2": "TLE", "9": "TLE", w: "Wrong" }
 )
 
 const testJudgeCompiled = Test(
@@ -57,18 +49,8 @@ const testJudgeCompiled = Test(
 	async () =>
 		await judge.judgeCompiled(1, `${__dirname}/../doctor/test`, 1000),
 	{
-		"1": { "2": "AC", "9": "AC", "10": "AC", sample: "AC", w: "AC" },
-		"2": { "2": "TLE", "9": "TLE", "10": "TLE", sample: "TLE", w: "Wrong" },
-		"3": { "2": "AC", "9": "AC", "10": "AC", sample: "AC", w: "AC" },
-		"4": { "2": "TLE", "9": "TLE", "10": "TLE", sample: "TLE", w: "Wrong" },
-		editorial: { "2": "AC", "9": "AC", "10": "AC", sample: "AC", w: "AC" },
-		sub2: {
-			"2": "TLE",
-			"9": "TLE",
-			"10": "TLE",
-			sample: "TLE",
-			w: "Wrong",
-		},
+		editorial: { "2": "AC", "9": "AC", w: "AC" },
+		sub2: { "2": "TLE", "9": "TLE", w: "Wrong" },
 	}
 )
 
