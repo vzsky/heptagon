@@ -1,22 +1,27 @@
 const utils = require("./utils")
 const fs = require("fs")
 
-const judgeOne = async (test, sol, time, output) => {
-	let runner = `./${sol} < ${test}.in > ${output}` //TODO add time limit
-	let checker = `diff -w ${output} ${test}.sol`
-	let cleaner = `rm -f ${output}`
+const judgeOne = async (mock, test, sol, time, output) => {
+	let runner = `${sol} < ${test}.in > ${__dirname}/../temp/${output}`
+	let checker = `diff -w ${__dirname}/../temp/${output} ${test}.sol`
+	let cleaner = `rm -f ${__dirname}/../temp/${output}`
 	const getResult = async () => {
 		let startAt = Date.now()
-		let e = await utils.Run(runner)
-		if (e) return "Error"
+
+		let [err] = await utils.Run(runner, { timeout: time })
+		if (err && err.signal === "SIGTERM") return "TLE"
+		if (err) {
+			console.log(err)
+			return "Error"
+		}
 
 		let timeUsed = Date.now() - startAt
 		if (timeUsed > 1000 * time) return "TLE"
 
-		let check = await utils.Run(checker)
-		if (check) return "Wrong"
+		let [runerr] = await utils.Run(checker)
+		if (runerr) return "Wrong"
 
-		return timeUsed
+		return mock ? "AC" : timeUsed
 	}
 	let result = await getResult()
 	await utils.Run(cleaner)
@@ -24,7 +29,7 @@ const judgeOne = async (test, sol, time, output) => {
 	return result
 }
 
-const judgeAnswer = (testdir, sol, time) => {
+const judgeAnswer = (mock, testdir, sol, time, solname) => {
 	let result = []
 	return new Promise((resolve) => {
 		fs.readdir(testdir, async (err, files) => {
@@ -39,22 +44,88 @@ const judgeAnswer = (testdir, sol, time) => {
 
 			for (let test of tests) {
 				result.push(
-					judgeOne(`${testdir}/${test}`, sol, time, `${test}smt`)
+					await judgeOne(
+						mock,
+						`${testdir}/${test}`,
+						sol,
+						time,
+						`${test}${solname}`
+					)
+				)
+			}
+			let ret = {}
+			for (let i in tests) {
+				ret[tests[i]] = result[i]
+			}
+			resolve(ret)
+		})
+	})
+}
+
+const judgeCompiled = (mock, testdir, time) => {
+	let result = []
+	return new Promise((resolve) => {
+		fs.readdir(`${__dirname}/../temp/compiled`, async (err, sols) => {
+			for (let sol of sols) {
+				result.push(
+					await judgeAnswer(
+						mock,
+						testdir,
+						`${__dirname}/../temp/compiled/${sol}`,
+						time,
+						sol
+					)
 				)
 			}
 
-			Promise.all(result).then((done) => {
-				let ret = {}
-				for (let i in tests) {
-					ret[tests[i]] = done[i]
-				}
-				resolve(ret)
-			})
+			let ret = {}
+			for (let i in sols) {
+				ret[sols[i]] = result[i]
+			}
+			resolve(ret)
 		})
 	})
+}
+
+const compile = async (soldir, sol) => {
+	let [err] = await utils.Run(
+		`g++ -std=c++17 -o ${__dirname}/../temp/compiled/${sol} ${soldir}/${sol}.cpp`
+	)
+	if (err) console.log("compiled error", sol)
+	return
+}
+
+const compileAll = async (soldir) => {
+	return new Promise((resolve, reject) => {
+		fs.readdir(soldir, async (err, sols) => {
+			try {
+				let result = []
+				for (let sol of sols) {
+					let splited = sol.split(".")
+					let ext = splited.pop()
+					result.push(await compile(soldir, splited.join(".")))
+				}
+				Promise.all(result).then((done) => {
+					resolve()
+				})
+			} catch (e) {
+				reject(e)
+			}
+		})
+	})
+}
+
+const Judge = async (soldir, testdir, time, mock = 0) => {
+	await compileAll(soldir)
+	let res = await judgeCompiled(mock, testdir, time)
+	await utils.Run(`rm -f ${__dirname}/../temp/compiled/*`)
+	return res
 }
 
 module.exports = {
 	judgeOne,
 	judgeAnswer,
+	judgeCompiled,
+	compileAll,
+	Judge,
 }

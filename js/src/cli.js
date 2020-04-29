@@ -5,8 +5,9 @@ module.exports = meow(
 	`
 	Usage
 	  ${green(`hexagon`)} ${yellow(`[--option]`)}
+	  ${green(`hexagon`)} ${cyan(`doctor`)}     Hear doctor's diagnosis
 	Options
-	  ${yellow(`--time`)}, ${yellow(`-t`)}      Set Time limit (in seconds)
+	  ${yellow(`--time`)}, ${yellow(`-t`)}      Set Time limit (in milliseconds)
 	Examples
 	  ${green(`hexagon`)} ${cyan(`sol`)} ${cyan(`testcases`)}
 `,
@@ -17,7 +18,7 @@ module.exports = meow(
 		flags: {
 			time: {
 				type: "number",
-				default: 1,
+				default: 1000,
 				alias: "t",
 			},
 		},
