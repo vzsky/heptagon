@@ -1,6 +1,6 @@
 {
     "name": "heptagon",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "just mini codeforces's polygon",
     "main": "src/main.js",
     "repository": "https://github.com/vzsky/heptagon",
