@@ -1,6 +1,6 @@
 {
     "name": "heptagon",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "just mini codeforces's polygon",
     "main": "src/main.js",
     "repository": "https://github.com/vzsky/heptagon",
@@ -34,6 +34,6 @@
         "heptagon": "src/main.js"
     },
     "scripts": {
-        "postinstall": "mkdir -p /tmp/heptagon/compiled && sudo chmod 777 /tmp/heptagon/compiled /tmp/heptagon"
+        "postinstall": "mkdir -p /tmp/heptagon/compiled && chmod 777 /tmp/heptagon/compiled /tmp/heptagon"
     }
 }
