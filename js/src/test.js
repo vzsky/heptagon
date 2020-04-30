@@ -18,17 +18,43 @@ const Test = (name, func, tobe) => {
   }
 }
 
-const testJudgeOne = Test(
-  "judgeOne",
+const testJudgeOneW = Test(
+  "judgeOne WA",
   async () =>
     await judge.judgeOne(
       1,
       `${__dirname}/../doctor/test/w`,
-      `${__dirname}/../temp/compiled/sub2`,
+      `/tmp/heptagon/compiled/sub2`,
       1000,
       "anything"
     ),
   "Wrong"
+)
+
+const testJudgeOneP = Test(
+  "judgeOne AC",
+  async () =>
+    await judge.judgeOne(
+      1,
+      `${__dirname}/../doctor/test/w`,
+      `/tmp/heptagon/compiled/editorial`,
+      1000,
+      "anything"
+    ),
+  "AC"
+)
+
+const testJudgeOneT = Test(
+  "judgeOne TLE",
+  async () =>
+    await judge.judgeOne(
+      1,
+      `${__dirname}/../doctor/test/2`,
+      `/tmp/heptagon/compiled/sub2`,
+      1000,
+      "anything"
+    ),
+  "TLE"
 )
 
 const testJudgeAnswer = Test(
@@ -37,7 +63,7 @@ const testJudgeAnswer = Test(
     await judge.judgeAnswer(
       1,
       `${__dirname}/../doctor/test`,
-      `${__dirname}/../temp/compiled/sub2`,
+      `/tmp/heptagon/compiled/sub2`,
       1000,
       "sub2"
     ),
@@ -55,7 +81,9 @@ const testJudgeCompiled = Test(
 )
 
 module.exports = {
-  testJudgeOne,
+  testJudgeOneW,
+  testJudgeOneP,
+  testJudgeOneT,
   testJudgeAnswer,
   testJudgeCompiled,
 }

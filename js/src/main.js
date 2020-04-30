@@ -10,10 +10,12 @@ const chalk = require("chalk")
 
 const Test = async (spinner) => {
   await judge.compileAll(`${__dirname}/../doctor/sol`)
-  await test.testJudgeOne(spinner)
+  await test.testJudgeOneP(spinner)
+  await test.testJudgeOneW(spinner)
+  await test.testJudgeOneT(spinner)
   await test.testJudgeAnswer(spinner)
   await test.testJudgeCompiled(spinner)
-  await utils.Run("rm -f ../temp/dcompiled/*")
+  await utils.Run(`rm -f /tmp/heptagon/compiled/*`)
 }
 
 const Print = async (res, spinner) => {

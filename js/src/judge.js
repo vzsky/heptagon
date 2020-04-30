@@ -10,9 +10,9 @@ const judgeOne = async (mock, test, sol, time, output) => {
   const bgRed = mock ? plain : chalk.white.bgRed
 
   try {
-    let runner = `${sol} < ${test}.in > ${__dirname}/../temp/${output}`
-    let checker = `diff -w ${__dirname}/../temp/${output} ${test}.sol`
-    let cleaner = `rm -f ${__dirname}/../temp/${output}`
+    let runner = `${sol} < ${test}.in > /tmp/heptagon/${output}`
+    let checker = `diff -w /tmp/heptagon/${output} ${test}.sol`
+    let cleaner = `rm -f /tmp/heptagon/${output}`
     const getResult = async () => {
       let startAt = Date.now()
 
@@ -80,7 +80,7 @@ const judgeAnswer = (mock, testdir, sol, time, solname) => {
 const judgeCompiled = (mock, testdir, time) => {
   let result = []
   return new Promise((resolve, reject) => {
-    fs.readdir(`${__dirname}/../temp/compiled`, async (err, sols) => {
+    fs.readdir(`/tmp/heptagon/compiled`, async (err, sols) => {
       if (err) reject(err)
       try {
         for (let sol of sols) {
@@ -88,7 +88,7 @@ const judgeCompiled = (mock, testdir, time) => {
             await judgeAnswer(
               mock,
               testdir,
-              `${__dirname}/../temp/compiled/${sol}`,
+              `/tmp/heptagon/compiled/${sol}`,
               time,
               sol
             )
@@ -109,7 +109,7 @@ const judgeCompiled = (mock, testdir, time) => {
 
 const compile = async (soldir, sol) => {
   let [err] = await utils.Run(
-    `g++ -std=c++17 -o ${__dirname}/../temp/compiled/${sol} ${soldir}/${sol}.cpp`
+    `g++ -std=c++17 -o /tmp/heptagon/compiled/${sol} ${soldir}/${sol}.cpp`
   )
   if (err) throw err
   return
@@ -140,7 +140,7 @@ const Judge = async (soldir, testdir, time, mock = 0) => {
   try {
     await compileAll(soldir)
     let res = await judgeCompiled(mock, testdir, time)
-    await utils.Run(`rm -f ${__dirname}/../temp/compiled/*`)
+    await utils.Run(`rm -f /tmp/heptagon/compiled/*`)
     return res
   } catch (e) {
     throw e
