@@ -2,7 +2,7 @@ const meow = require("meow")
 const { green, yellow, cyan } = require("chalk")
 
 module.exports = meow(
-	`
+  `
 	Usage
 	  ${green(`heptagon`)} ${cyan(`sols`)} ${cyan(`tests`)} ${yellow(`[--option]`)}
 	  ${green(`heptagon`)} ${cyan(`doctor`)}\t\t\tHear doctor's diagnosis
@@ -11,16 +11,16 @@ module.exports = meow(
 	Examples
 	  ${green(`heptagon`)} ${cyan(`sol`)} ${cyan(`testcases`)}
 `,
-	{
-		booleanDefault: undefined,
-		hardRejection: false,
-		inferType: false,
-		flags: {
-			time: {
-				type: "number",
-				default: 1000,
-				alias: "t",
-			},
-		},
-	}
+  {
+    booleanDefault: undefined,
+    hardRejection: false,
+    inferType: false,
+    flags: {
+      time: {
+        type: "number",
+        default: 1000,
+        alias: "t",
+      },
+    },
+  }
 )
