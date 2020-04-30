@@ -24,7 +24,7 @@ const testJudgeOneW = Test(
     await judge.judgeOne(
       1,
       `${__dirname}/../doctor/test/w`,
-      `/tmp/heptagon/compiled/sub2`,
+      `/tmp/heptagon/compiled/sol`,
       1000,
       "anything"
     ),
@@ -36,8 +36,8 @@ const testJudgeOneP = Test(
   async () =>
     await judge.judgeOne(
       1,
-      `${__dirname}/../doctor/test/w`,
-      `/tmp/heptagon/compiled/editorial`,
+      `${__dirname}/../doctor/test/a`,
+      `/tmp/heptagon/compiled/sol`,
       1000,
       "anything"
     ),
@@ -49,8 +49,8 @@ const testJudgeOneT = Test(
   async () =>
     await judge.judgeOne(
       1,
-      `${__dirname}/../doctor/test/2`,
-      `/tmp/heptagon/compiled/sub2`,
+      `${__dirname}/../doctor/test/a`,
+      `/tmp/heptagon/compiled/tle`,
       1000,
       "anything"
     ),
@@ -63,11 +63,11 @@ const testJudgeAnswer = Test(
     await judge.judgeAnswer(
       1,
       `${__dirname}/../doctor/test`,
-      `/tmp/heptagon/compiled/sub2`,
+      `/tmp/heptagon/compiled/sol`,
       1000,
       "sub2"
     ),
-  { "2": "TLE", "9": "TLE", w: "Wrong" }
+  { a: "AC", w: "Wrong" }
 )
 
 const testJudgeCompiled = Test(
@@ -75,8 +75,8 @@ const testJudgeCompiled = Test(
   async () =>
     await judge.judgeCompiled(1, `${__dirname}/../doctor/test`, 1000),
   {
-    editorial: { "2": "AC", "9": "AC", w: "AC" },
-    sub2: { "2": "TLE", "9": "TLE", w: "Wrong" },
+    sol: { a: "AC", w: "Wrong" },
+    tle: { a: "TLE", w: "TLE" },
   }
 )
 

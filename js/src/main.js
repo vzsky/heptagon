@@ -61,7 +61,7 @@ const main = async () => {
     } catch (e) {
       spinner.fail(
         chalk.red(
-          "Error occurred, try heptagon docter, fix directories, or contact my99n"
+          "Error occurred, try heptagon doctor, fix directories, or contact my99n"
         )
       )
       spinner.stop()

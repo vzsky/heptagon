@@ -4,8 +4,8 @@ const { green, yellow, cyan } = require("chalk")
 module.exports = meow(
   `
 	Usage
-	  ${green(`heptagon`)} ${cyan(`sols`)} ${cyan(`tests`)} ${yellow(`[--option]`)}
-	  ${green(`heptagon`)} ${cyan(`doctor`)}\t\t\tHear doctor's diagnosis
+	  ${green(`heptagon`)} ${cyan(`SolsDir`)} ${cyan(`TestsDir`)} ${yellow(`[--option]`)}
+	  ${green(`heptagon`)} ${cyan(`doctor`)}\t\t\tListen to doctor's diagnosis
 	Options
 	  ${yellow(`--time`)}, ${yellow(`-t`)}\t\t\t\tSet Time limit (in milliseconds)
 	Examples
