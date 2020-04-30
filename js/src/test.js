@@ -13,7 +13,7 @@ const Test = (name, func, tobe) => {
         : chalk.white.bgRed(" FAILED ")
       } ${name} in ${chalk.yellow(Date.now() - startAt)} ms`
     if (status) spinner.succeed(msg)
-    if (!status) spinner.succeed(msg)
+    if (!status) spinner.fail(msg)
     spinner.start()
   }
 }

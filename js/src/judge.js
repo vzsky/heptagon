@@ -3,6 +3,12 @@ const fs = require("fs")
 const chalk = require("chalk")
 
 const judgeOne = async (mock, test, sol, time, output) => {
+  const plain = (text) => (text)
+  const red = mock ? plain : chalk.red
+  const green = mock ? plain : chalk.green
+  const yellow = mock ? plain : chalk.yellow
+  const bgRed = mock ? plain : chalk.white.bgRed
+
   try {
     let runner = `${sol} < ${test}.in > ${__dirname}/../temp/${output}`
     let checker = `diff -w ${__dirname}/../temp/${output} ${test}.sol`
@@ -11,19 +17,19 @@ const judgeOne = async (mock, test, sol, time, output) => {
       let startAt = Date.now()
 
       let [err] = await utils.Run(runner, { timeout: time })
-      if (err && err.signal === "SIGTERM") return chalk.yellow("TLE")
+      if (err && err.signal === "SIGTERM") return yellow("TLE")
       if (err) {
         console.log(err)
-        return chalk.white.bgRed(" Error ")
+        return bgRed(" Error ")
       }
 
       let timeUsed = Date.now() - startAt
-      if (timeUsed > 1000 * time) return chalk.yellow("TLE")
+      if (timeUsed > 1000 * time) return yellow("TLE")
 
       let [runerr] = await utils.Run(checker)
-      if (runerr) return chalk.red("Wrong")
+      if (runerr) return red("Wrong")
 
-      return chalk.green(mock ? "AC" : timeUsed)
+      return mock ? "AC" : green(timeUsed)
     }
     let result = await getResult()
     await utils.Run(cleaner)

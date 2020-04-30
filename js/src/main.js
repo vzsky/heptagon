@@ -13,7 +13,7 @@ const Test = async (spinner) => {
   await test.testJudgeOne(spinner)
   await test.testJudgeAnswer(spinner)
   await test.testJudgeCompiled(spinner)
-  await utils.Run("rm -f ../temp/compiled/*")
+  await utils.Run("rm -f ../temp/dcompiled/*")
 }
 
 const Print = async (res, spinner) => {
