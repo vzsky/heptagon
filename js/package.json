@@ -1,6 +1,6 @@
 {
     "name": "heptagon",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "just mini codeforces's polygon",
     "main": "src/main.js",
     "repository": "https://github.com/vzsky/heptagon",
@@ -14,7 +14,8 @@
     },
     "files": [
         "src/*",
-        "doctor/*"
+        "doctor/*",
+        "temp/*"
     ],
     "keywords": [
         "grader",
